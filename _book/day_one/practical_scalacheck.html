@@ -1,0 +1,539 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>Practical ScalaCheck · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.0">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="cbt.html" />
+    
+    
+    <link rel="prev" href="compilers_are_in_memory_databases.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Day One</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="compilers_are_in_memory_databases.html">
+            
+                <a href="compilers_are_in_memory_databases.html">
+            
+                    
+                    Compilers are (in Memory) Databases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2" data-path="practical_scalacheck.html">
+            
+                <a href="practical_scalacheck.html">
+            
+                    
+                    Practical ScalaCheck
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="cbt.html">
+            
+                <a href="cbt.html">
+            
+                    
+                    CBT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="generic_derivation.html">
+            
+                <a href="generic_derivation.html">
+            
+                    
+                    Generic Derivation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="guide_to_shapeless.html">
+            
+                <a href="guide_to_shapeless.html">
+            
+                    
+                    Type Astronauts Guide to Shapeless
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="tour_of_scalameta.html">
+            
+                <a href="tour_of_scalameta.html">
+            
+                    
+                    Tour of scala.meta
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="functional_database_programming.html">
+            
+                <a href="functional_database_programming.html">
+            
+                    
+                    Functional Database Programming
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="run_wild_run_free.html">
+            
+                <a href="run_wild_run_free.html">
+            
+                    
+                    Run Wild, Run Free!
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="enterprise_algebras.html">
+            
+                <a href="enterprise_algebras.html">
+            
+                    
+                    Enterprise Algebras
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="advanced_akka_streams.html">
+            
+                <a href="advanced_akka_streams.html">
+            
+                    
+                    Advanced Akka Streams
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="distributed_vs_compositionality.html">
+            
+                <a href="distributed_vs_compositionality.html">
+            
+                    
+                    Distributed Systems vs Compositionality
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Day Two</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../day_two/scalafiddle.html">
+            
+                <a href="../day_two/scalafiddle.html">
+            
+                    
+                    ScalaFiddle
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../day_two/use_the_fors.html">
+            
+                <a href="../day_two/use_the_fors.html">
+            
+                    
+                    Use the Fors, Luke
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../day_two/free_monads.html">
+            
+                <a href="../day_two/free_monads.html">
+            
+                    
+                    Free Monads
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../day_two/can_we_make_concurrency_safer.html">
+            
+                <a href="../day_two/can_we_make_concurrency_safer.html">
+            
+                    
+                    Can We Make Concurrency Safer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../day_two/first_class_coroutines.html">
+            
+                <a href="../day_two/first_class_coroutines.html">
+            
+                    
+                    First Class Coroutines
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../day_two/quaich_serverless_microframework.html">
+            
+                <a href="../day_two/quaich_serverless_microframework.html">
+            
+                    
+                    quaich: Serverless Microframework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.7" data-path="../day_two/compiling_for_the_jvm.html">
+            
+                <a href="../day_two/compiling_for_the_jvm.html">
+            
+                    
+                    Compiling for the JVM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.8" data-path="../day_two/staged_parser_combinators.html">
+            
+                <a href="../day_two/staged_parser_combinators.html">
+            
+                    
+                    Staged Parser Combinators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.9" data-path="../day_two/essential_vs_accidental_complexity_in_scala.html">
+            
+                <a href="../day_two/essential_vs_accidental_complexity_in_scala.html">
+            
+                    
+                    Essential vs Accidental Complexity in Scala
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.10" data-path="../day_two/story_of_a_parallel_scala_library.html">
+            
+                <a href="../day_two/story_of_a_parallel_scala_library.html">
+            
+                    
+                    Story of a Parallel Scala Library
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.11" data-path="../day_two/managing_your_resources.html">
+            
+                <a href="../day_two/managing_your_resources.html">
+            
+                    
+                    Managing Your Resources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Practical ScalaCheck</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="practical-scalacheck---noel-markham">Practical ScalaCheck - Noel Markham</h3><p>Noel Markham from 47 degrees (a scala consultancy and sponsor of the conference) gave a great introduction to 
+property-based testing using the ScalaCheck library.</p><p>The approach can be described something like this:</p><ul><li><p>Specify an invariant for the code under test, e.g. the function to find the absolute value of an int, Math.abs, should
+always return a value greater than or equal to zero.</p></li>
+<li><p>Describe the range of inputs over which the invariant should hold, e.g. all integer values.</p></li>
+<li><p>To run the test, the framework generates a number of inputs (100 by default) and checks that the invariant
+holds when the function is applied to each of them.</p></li></ul>
+<p>The generated inputs are not quite random, instead concentrating on boundaries (e.g. Int.MaxValue) where errors are
+more likely to occur.</p><p>The technique is very effective at finding issues that may have been missed during the original design and/or 
+implementation of the code. A good example is the invariant described above for Math.abs, where it will return a 
+negative result when passed Int.MinValue as input, because the range of int on the JVM has one more negative value than
+positive.</p><p><strong>Slides</strong> - <a href="http://noelmarkham.github.io/practical-scalacheck/index.html#/" target="_blank">http://noelmarkham.github.io/practical-scalacheck/index.html#/</a></p><p><strong>Exercises</strong> - <a href="http://www.47deg.com/blog/scalacheck-for-scala-exercises" target="_blank">http://www.47deg.com/blog/scalacheck-for-scala-exercises</a></p>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="compilers_are_in_memory_databases.html" class="navigation navigation-prev " aria-label="Previous page: Compilers are (in Memory) Databases">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="cbt.html" class="navigation navigation-next " aria-label="Next page: CBT">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Practical ScalaCheck","level":"2.2","depth":1,"next":{"title":"CBT","level":"2.3","depth":1,"path":"day_one/cbt.md","ref":"day_one/cbt.md","articles":[]},"previous":{"title":"Compilers are (in Memory) Databases","level":"2.1","depth":1,"path":"day_one/compilers_are_in_memory_databases.md","ref":"day_one/compilers_are_in_memory_databases.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"day_one/practical_scalacheck.md","mtime":"2016-09-18T19:12:58.986Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-18T21:35:15.487Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
