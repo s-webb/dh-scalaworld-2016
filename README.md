@@ -5,6 +5,11 @@ Centre in Penrith for two days of talks given by some of the most prominent expe
 size of the event no doubt in part due to it's relative inaccessibility, in more than one sense of the word. A fact the 
 organisers seem fairly proud of.
 
+The conference itself is a two day event, preceded by an optional weekend of outdoor activities (see pic below) and
+followed by a one day functional programming workshop.
+
+![walkers](../gitbook/images/walkers.jpg)
+
 The stage was well set on the evening before the start of the conference when, on asking for three pints of a guest beer
 called Yolo at a local bar, a helpful voice chirped up 'I think you'll find that's Yolii'. Found the right place at
 least then.
