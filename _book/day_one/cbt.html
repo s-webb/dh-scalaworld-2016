@@ -450,16 +450,44 @@
                                 <section class="normal markdown-section">
                                 
                                 <h3 id="cbt-fast-intuitive-convenient-scala-builds---jan-christopher-vogt">CBT: Fast, Intuitive, Convenient Scala Builds - Jan Christopher Vogt</h3><p>Almost all scala projects are built with sbt. Originally the &apos;simple&apos; build tool, the name had to be changed
-once it had become laughably innacurate. By creating CBT, Jan Christopher Vogt hopes to provide a simpler, faster 
-alternative that integrates more naturally with the unix command-line, without losing the flexibility and power that 
-are sbts strengths.</p><p>This looks like an interesting project, and sbt could certainly do with some competition, but I wonder whether
+once it had become laughably inaccurate. By creating CBT, Jan Christopher Vogt hopes to provide a simpler, faster
+alternative that integrates more naturally with the unix command-line, without losing the flexibility and power that
+are sbts strengths.</p><p>The basic idea is that you create a Scala class to model your build, then override and/or add methods to set
+up the tasks that you need. CBT provides a few base classes and traits to mix in. A simple build might end up
+looking something like this:</p><pre><code class="lang-scala"><span class="hljs-keyword">import</span> cbt._
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Build</span>(<span class="hljs-params">val context: <span class="hljs-type">Context</span></span>) <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseBuild</span>(<span class="hljs-params">context</span>) </span>{
+  outer =&gt;
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dependencies</span></span>: <span class="hljs-type">Seq</span>[<span class="hljs-type">Dependency</span>] = {
+    <span class="hljs-keyword">super</span>.dependencies ++ <span class="hljs-type">Resolver</span>(mavenCentral).bind(
+      <span class="hljs-type">ScalaDependency</span>(<span class="hljs-string">&quot;com.example&quot;</span>, <span class="hljs-string">&quot;a-scala-library&quot;</span>, <span class="hljs-string">&quot;1.0&quot;</span>),
+      <span class="hljs-type">MavenDependency</span>(<span class="hljs-string">&quot;com.example&quot;</span>, <span class="hljs-string">&quot;a-java-library&quot;</span>, <span class="hljs-string">&quot;1.1&quot;</span>)
+    )
+  }
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span></span>: <span class="hljs-type">Option</span>[<span class="hljs-type">ExitCode</span>] = <span class="hljs-type">Some</span> {
+    <span class="hljs-keyword">new</span> <span class="hljs-type">BasicBuild</span>(context) <span class="hljs-keyword">with</span> <span class="hljs-type">ScalaTest</span> {
+      <span class="hljs-comment">// Depend on the main build class, plus dependencies from ScalaTest trait</span>
+      <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dependencies</span> </span>= outer +: <span class="hljs-keyword">super</span>.dependencies
+    }.run()
+  }
+
+  <span class="hljs-comment">// Allows running `cbt foo` from the command line to call this method</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>() = println(<span class="hljs-string">&quot;Hello world!&quot;</span>)
+}</code></pre>
+<p>It&apos;s also super easy to write plugins for CBT - literally just extend the <code>cbt.Plugin</code> trait, then any build class
+which extends it will have all of its methods available to use. So in the example above, we could have extracted the
+method <code>foo()</code> into a separate trait, and enabled our <code>cbt foo</code> command-line invocation by mixing it in.</p><p>This looks like an interesting project, and sbt could certainly do with some competition, but I wonder whether
 all of the conceptual bulk of sbt (scopes, axes, configurations, etc.) accumulated for a reason and will either creep
-into CBT over time or leak out in other ways.</p><p>A couple of great little tools came up during the talk:</p><ul><li><p><strong>nailgun:</strong> Startup times for the JVM are ridiculously slow, making it a poor choice for short-lived jobs. Nailgun
-(<a href="http://www.martiansoftware.com/nailgun/" target="_blank">http://www.martiansoftware.com/nailgun/</a>) solves this by keeping a JVM running in the background as a server and using 
-a client written in C to run tasks in it.  Bit of a revelation to see Java programs completing (kind of) with single 
+into CBT over time or leak out in other ways.</p><p>It was also clear that this is a pretty early-stage project, with a number of bugs and edge cases still to be ironed
+out. Currently installation is by means of cloning the source repository - it&apos;s unclear whether this will change in
+future. Vogt seems pretty keen for people to get involved; indeed, one of the reasons behind bootstrapping from source
+is so that people can understand the source code and hopefully contribute.</p><p>A couple of great little tools came up during the talk:</p><ul><li><p><strong>nailgun:</strong> Startup times for the JVM are ridiculously slow, making it a poor choice for short-lived jobs. Nailgun
+(<a href="http://www.martiansoftware.com/nailgun/" target="_blank">http://www.martiansoftware.com/nailgun/</a>) solves this by keeping a JVM running in the background as a server and using
+a client written in C to run tasks in it.  Bit of a revelation to see Java programs completing (kind of) with single
 digit millisecond duration.</p></li>
-<li><p><strong>coursier</strong>: Coursier (<a href="https://github.com/alexarchambault/coursier" target="_blank">https://github.com/alexarchambault/coursier</a>) can be used as a drop-in replacement for the 
-default Ivy dependency resolver used by sbt. Addresses one of the biggest gripes most people have with sbt (aside from 
+<li><p><strong>coursier</strong>: Coursier (<a href="https://github.com/alexarchambault/coursier" target="_blank">https://github.com/alexarchambault/coursier</a>) can be used as a drop-in replacement for the
+default Ivy dependency resolver used by sbt. Addresses one of the biggest gripes most people have with sbt (aside from
 the fiddly setup); the amount of time spent sat there waiting for the &apos;Resolving...&apos; message to go away.</p></li></ul>
 <p><strong>Slides</strong> - <a href="https://docs.google.com/presentation/d/1odc1NbkpXPFuhnln-rusB1Dkk3dz7yOeHh0C9WDHodk/" target="_blank">https://docs.google.com/presentation/d/1odc1NbkpXPFuhnln-rusB1Dkk3dz7yOeHh0C9WDHodk/</a></p><p><strong>Earlier version of talk</strong> - <a href="http://www.nescala.org/2016/slides/cvogt.pdf" target="_blank">http://www.nescala.org/2016/slides/cvogt.pdf</a></p>
                                 
@@ -504,7 +532,7 @@ the fiddly setup); the amount of time spent sat there waiting for the &apos;Reso
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CBT","level":"2.3","depth":1,"next":{"title":"Generic Derivation","level":"2.4","depth":1,"path":"day_one/generic_derivation.md","ref":"day_one/generic_derivation.md","articles":[]},"previous":{"title":"Practical ScalaCheck","level":"2.2","depth":1,"path":"day_one/practical_scalacheck.md","ref":"day_one/practical_scalacheck.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"day_one/cbt.md","mtime":"2016-09-18T19:56:09.284Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-18T22:16:59.159Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"CBT","level":"2.3","depth":1,"next":{"title":"Generic Derivation","level":"2.4","depth":1,"path":"day_one/generic_derivation.md","ref":"day_one/generic_derivation.md","articles":[]},"previous":{"title":"Practical ScalaCheck","level":"2.2","depth":1,"path":"day_one/practical_scalacheck.md","ref":"day_one/practical_scalacheck.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"day_one/cbt.md","mtime":"2016-09-19T12:40:59.300Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-19T12:44:20.128Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -512,6 +540,10 @@ the fiddly setup); the amount of time spent sat there waiting for the &apos;Reso
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
