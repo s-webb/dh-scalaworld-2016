@@ -449,10 +449,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h3 id="make-your-programs-free---pawel-szulc">Make Your Programs Free - Pawel Szulc</h3><p>Great last-minute live coding session on free monads, covering implementation of a simple algrebra, vertical and 
+                                <h3 id="make-your-programs-free---pawel-szulc">Make Your Programs Free - Pawel Szulc</h3><p>Great last-minute live coding session on free monads, covering implementation of a simple algrebra, vertical and
 horizontal composition. Worth going through the history of the repo commit-by-commit to see how the final version is
-built up, as Pawel did in the talk. Also to observe the content being put together at 2am on the day of the talk!</p><p>The intial example is taken directly from the book &apos;Functional Programming in Scala&apos;, published towards the end of 
-2014. A book I still haven&apos;t managed to finish after four attempts.</p><p><strong>Slides</strong> - <a href="http://www.slideshare.net/paulszulc/make-your-programs-free" target="_blank">http://www.slideshare.net/paulszulc/make-your-programs-free</a></p><p><strong>Code</strong> - <a href="https://github.com/rabbitonweb/make-your-programs-free/" target="_blank">https://github.com/rabbitonweb/make-your-programs-free/</a></p>
+built up, as Pawel did in the talk. Also to observe the content being put together at 2am on the day of the talk!</p><p>The intial example is taken directly from the book &apos;Functional Programming in Scala&apos;, published towards the end of
+2014. A book I still haven&apos;t managed to finish after four attempts.</p><p>Szulc presented an interesting way to think about the free monad which actually started to make sense to me (although
+I&apos;m not quite sure if it was a moment of revelation or stockholm syndrome). Essentially if you have a <code>Free[S, A]</code>,
+then you can think of the <code>Free</code> as the program you are writing, the <code>S</code> as the language (or algebra) you are
+writing it in, and the <code>A</code> as the value to be produced from your program. It&apos;s then possible to make a new program
+using a coproduct (basically a union) of two algebras, to compose <code>Free</code>s.</p><p>To apply this pattern, you also need an interpreter of type <code>F ~&gt; G</code> (a &quot;natural transformation&quot;, roughly
+equivalent to <code>F[A] =&gt; G[A]</code>). Interpreters can be used to convert between high-level and low-level ops, and can
+be composed together with <code>andThen</code>.</p><p>This talk made heavy use of scalaz, which by the end of it was starting to look like it might be pretty interesting
+to use. The main problem with it from my point of view is the excessive use of symbols - something like <code>~&gt;</code> is pretty
+difficult to pronounce, let alone to google. Cats makes this a bit easier for newcomers by giving its classes names
+which are actually words, a pretty radical notion in the FP world.</p><p><strong>Slides</strong> - <a href="http://www.slideshare.net/paulszulc/make-your-programs-free" target="_blank">http://www.slideshare.net/paulszulc/make-your-programs-free</a></p><p><strong>Code</strong> - <a href="https://github.com/rabbitonweb/make-your-programs-free/" target="_blank">https://github.com/rabbitonweb/make-your-programs-free/</a></p>
                                 
                                 </section>
                             
@@ -495,7 +504,7 @@ built up, as Pawel did in the talk. Also to observe the content being put togeth
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Free Monads","level":"3.3","depth":1,"next":{"title":"Can We Make Concurrency Safer","level":"3.4","depth":1,"path":"day_two/can_we_make_concurrency_safer.md","ref":"day_two/can_we_make_concurrency_safer.md","articles":[]},"previous":{"title":"Use the Fors, Luke","level":"3.2","depth":1,"path":"day_two/use_the_fors.md","ref":"day_two/use_the_fors.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"day_two/free_monads.md","mtime":"2016-09-19T12:05:41.518Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-19T12:44:20.128Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Free Monads","level":"3.3","depth":1,"next":{"title":"Can We Make Concurrency Safer","level":"3.4","depth":1,"path":"day_two/can_we_make_concurrency_safer.md","ref":"day_two/can_we_make_concurrency_safer.md","articles":[]},"previous":{"title":"Use the Fors, Luke","level":"3.2","depth":1,"path":"day_two/use_the_fors.md","ref":"day_two/use_the_fors.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"day_two/free_monads.md","mtime":"2016-09-23T08:51:45.734Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-23T08:55:01.732Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -503,10 +512,6 @@ built up, as Pawel did in the talk. Also to observe the content being put togeth
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
